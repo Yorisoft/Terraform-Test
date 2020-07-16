@@ -1,8 +1,0 @@
-version: '3.3'
-
-services:
-  terraform:
-    build: .
-    container_name: terraform
-    environment:
-      - OKTA_API_TOKEN=00nTM_wM7ZCxxxEHjqtCUr7XRZHjJlCqDU1kAq7hjY
