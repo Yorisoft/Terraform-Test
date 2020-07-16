@@ -7,7 +7,7 @@ WORKDIR /usr/src/terraform
 #copying ALL  ->  WORKDIR
 COPY . .
 
-#set up environment variablesss
+#set up environment variables
 ENV OKTA_API_TOKEN=
 
 #
