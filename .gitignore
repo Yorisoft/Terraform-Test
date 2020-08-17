@@ -1,0 +1,12 @@
+#IDE
+*.idea
+
+#VS files
+*.vscode
+
+#terraform plugins
+*.terraform
+
+#terraform state files
+*.tfstate
+*.tfstate.*
