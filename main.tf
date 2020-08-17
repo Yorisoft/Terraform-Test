@@ -3,7 +3,7 @@ provider "okta" {
     org_name = "dev-649194"
     base_url = "okta.com"
 }
-
+ 
 resource "okta_app_oauth" "example" {
   label                      = "Yelsin web testing Change workspace test"
   type                       = "web"
