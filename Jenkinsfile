@@ -1,4 +1,4 @@
-#!user/bin/env groovy
+#!/user/bin/env groovy
 
 properties([
     parameters([
