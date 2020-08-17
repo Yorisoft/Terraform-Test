@@ -7,12 +7,14 @@ WORKDIR /usr/src/terraform
 #copying ALL  ->  WORKDIR
 COPY . .
 
-#set up environment variables
-ENV OKTA_API_TOKEN=
+ENV AWS_ACCESS_KEY_ID=AKIAWIB3TCSMK56ZSY6E \
+    AWS_SECRET_ACCESS_KEY=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 \
+    OKTA_API_TOKEN=00x_rGO-dbWOrowQkDoDSeIrxAgNKBWaAuclZzpQFQ
+
 
 #
 RUN terraform init && \
-	terraform import okta_app_oauth.example 0oahjv3ni5cUh53kx4x6 && \
 	terraform plan && \
-	terraform apply -auto-approve
+	terraform apply -auto-approve && \
+    terraform show
 

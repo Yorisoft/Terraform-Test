@@ -1,37 +1,31 @@
+// exporting okta_api_key
 provider "okta" {
     org_name = "dev-649194"
     base_url = "okta.com"
 }
 
 resource "okta_app_oauth" "example" {
-  label                      = "Yelsin web testing"
+  label                      = "Yelsin web testing Change workspace test"
   type                       = "web"
   grant_types                = ["authorization_code"]
-  redirect_uris              = ["https://example.com/"]
+  redirect_uris              = ["https://example.com/workspace"]
   response_types             = ["code"]
 }
 
-/* variable "api_token" {
-  type    = string
-} */
-/* data "okta_auth_server" "example" {
-  name = "Yelsin web test"
-}   */
-
-/* resource "okta_app_oauth" "newExample" {
-  label                      = "Team test"
-  type                       = "service"
-
+resource "okta_app_oauth" "example2" {
+  label                      = "Yelsin web testing 1 Change workspace test"
+  type                       = "web"
+  grant_types                = ["authorization_code"]
+  redirect_uris              = ["https://example.com/workspace"]
+  response_types             = ["code"]
 }
-*/
 
-/*
-
-resource "local_file" "app_info" {
-    content = "secret:${okta_app_oauth.example.client_id} \n\nid:${okta_app_oauth.example.client_secret}"
-    filename = "./test.txt"
-} */ 
-
-/* module "get-credentials" {
-    source = "./modules/get-credentials"
-} */
+// exporting access_key and secret_key
+/*  data "terraform_remote_state" "iam_okta_apps" {
+  backend = "s3"
+  config = {
+    bucket = "terraform-okta-s3-test"
+    key    = "state_files/terraform.tfstate"
+    region = "us-east-2"
+  } 
+ } */
