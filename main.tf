@@ -19,7 +19,7 @@ resource "okta_app_oauth" "example2" {
   redirect_uris              = ["https://example.com/workspace"]
   response_types             = ["code"]
 }
- 
+
 // exporting access_key and secret_key
 /*  data "terraform_remote_state" "iam_okta_apps" {
   backend = "s3"
