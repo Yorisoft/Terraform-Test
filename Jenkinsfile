@@ -27,14 +27,18 @@ node('worker'){
         }
         stage('Plan Terraform'){
             image.inside(
+                withCredentials([string(credentialsId: 'OKTA_API_TOKEN', variable: 'OKTA_API_TOKEN'),]) {
                 sh('terraform plan')
+            }
             )
         }
         if (env.APPLYFEATUREBRANCH == 'true' || env.BRANCH_NAME == 'master') {
             stage('Apply Terraform'){
-                image.inside(
-                    sh('terraform apply')
-                )
+                image.inside() {
+                    withCredentials([string(credentialsId: 'OKTA_API_TOKEN', variable: 'OKTA_API_TOKEN'),]) {
+                        sh('terraform plan')
+                    }
+                }
             }
         }
     }
