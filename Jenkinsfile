@@ -1,5 +1,3 @@
-#! groovy
-
 properties([
     parameters([
         booleanParam(defaultValue: false, description: 'Apply feature branch', name: 'APPLYFEATUREBRANCH')
