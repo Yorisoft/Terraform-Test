@@ -3,7 +3,7 @@ properties([
         booleanParam(defaultValue: false, description: 'Apply feature branch', name: 'APPLYFEATUREBRANCH')
     ])
 ])
- 
+  
 node('worker'){
     def image
     def pipeline = new cicd.Pipeline()
