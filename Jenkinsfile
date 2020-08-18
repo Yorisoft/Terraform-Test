@@ -1,4 +1,11 @@
- 
+#!/usr/bin/env groovy
+
+properties([
+    parameters([
+        booleanParam(defaultValue: false, description: 'Apply feature branch', name: 'APPLYFEATUREBRANCH')
+    ])
+])
+  
 node('worker'){
     def image
     def pipeline = new cicd.Pipeline()
@@ -8,7 +15,7 @@ node('worker'){
 
         stage('Docker Build'){
             image = pipeline.buildDockerImage(
-                appName: 'Terraform Demo',
+                appName: 'Terraform Demo'
                 appVersion: '1.0.0'
             )
         }
@@ -20,7 +27,7 @@ node('worker'){
         }
         stage('Plan Terraform'){
             image.inside(
-                withCredentials([string(credentialsId: 'API_TOKEN', variable: 'API_TOKEN'),]) {
+                withCredentials([string(credentialsId: 'OKTA_API_TOKEN', variable: 'OKTA_API_TOKEN'),]) {
                 sh('terraform plan')
             }
             )
@@ -28,7 +35,7 @@ node('worker'){
         if (env.APPLYFEATUREBRANCH == 'true' || env.BRANCH_NAME == 'master') {
             stage('Apply Terraform'){
                 image.inside() {
-                    withCredentials([string(credentialsId: 'API_TOKEN', variable: 'API_TOKEN'),]) {
+                    withCredentials([string(credentialsId: 'OKTA_API_TOKEN', variable: 'OKTA_API_TOKEN'),]) {
                         sh('terraform plan')
                     }
                 }
