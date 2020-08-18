@@ -4,7 +4,7 @@ properties([
     ])
 ])
   
-node('worker'){
+node('worker') {
     def image
     def pipeline = new cicd.Pipeline()
 
@@ -24,11 +24,11 @@ node('worker'){
             }
         }
         stage('Plan Terraform') {
-            image.inside(
+            image.inside() {
                 withCredentials([string(credentialsId: 'OKTA_API_TOKEN', variable: 'OKTA_API_TOKEN'),]) {
                 sh('terraform plan')
+                }
             }
-            )
         }
         if (env.APPLYFEATUREBRANCH == 'true' || env.BRANCH_NAME == 'master') {
             stage('Apply Terraform') {
