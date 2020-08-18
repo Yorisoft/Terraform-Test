@@ -9,7 +9,7 @@ node('worker') {
     def pipeline = new cicd.Pipeline()
 
     try {
-        pipeline.cleanupAndCheckout()
+        pipeline.cleanupAndCheckout()   
 
         stage('Docker Build') {   
             image = pipeline.buildDockerImage(
