@@ -13,19 +13,19 @@ node('worker'){
     try {
         pipeline.cleanupAndCheckout()
 
-        stage('Docker Build'){
+        stage('Docker Build') {
             image = pipeline.buildDockerImage(
-                appName: 'Terraform Demo'
+                appName: 'Terraform Demo',
                 appVersion: '1.0.0'
             )
         }
-        stage('Initialize Terraform'){
-            image.inside(
+        stage('Initialize Terraform') {
+            image.inside() {
                 sh('terraform 0.13upgrade -yes .')
                 sh('terraform init')
-            )
+            }
         }
-        stage('Plan Terraform'){
+        stage('Plan Terraform') {
             image.inside(
                 withCredentials([string(credentialsId: 'OKTA_API_TOKEN', variable: 'OKTA_API_TOKEN'),]) {
                 sh('terraform plan')
@@ -33,7 +33,7 @@ node('worker'){
             )
         }
         if (env.APPLYFEATUREBRANCH == 'true' || env.BRANCH_NAME == 'master') {
-            stage('Apply Terraform'){
+            stage('Apply Terraform') {
                 image.inside() {
                     withCredentials([string(credentialsId: 'OKTA_API_TOKEN', variable: 'OKTA_API_TOKEN'),]) {
                         sh('terraform plan')
