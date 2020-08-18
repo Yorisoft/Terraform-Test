@@ -11,7 +11,7 @@ node('worker'){
                 appName: 'Terraform Demo'
                 appVersion: '1.0.0'
             )
-        }
+        }   
         stage('Initialize Terraform'){
             image.inside(
                 sh('terraform 0.13upgrade -yes .')
