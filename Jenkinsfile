@@ -13,7 +13,7 @@ node('worker'){
     try {
         pipeline.cleanupAndCheckout()
 
-        stage('Docker Build') {    
+        stage('Docker Build') {
             image = pipeline.buildDockerImage(
                 appName: 'Terraform Demo',
                 appVersion: '1.0.0'
