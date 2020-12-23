@@ -5,10 +5,9 @@ node('worker') {
   def pipeline = new cicd.PipeLine()
 
   try {
-    pipeline.cleanupAndCheckout()
 
     stage('build docker') {
-      image = pipeline.buildDockerImage(
+      image = buildDockerImage(
         appName: 'My Docker Image',
         appVersion: '1.0'
       )
