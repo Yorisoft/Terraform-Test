@@ -2,7 +2,6 @@
 
 node('worker') {
   def image
-  def pipeline = new cicd.PipeLine()
 
   try {
 
