@@ -10,7 +10,7 @@ node('worker') {
       image = buildDockerImage(
         appName: 'My Docker Image',
         appVersion: '1.0'
-      )  
+      )
     }
 
     stage('terraform init') {
