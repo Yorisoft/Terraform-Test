@@ -3,10 +3,8 @@
 node {
   try {
     stage('terraform init') {
-      withCredentials([string(credentialsId:'OKTA_API_TOKEN', variable: 'OKTA_API_TOKEN'),]) {
-        sh('terraform 0.13upgrade -yes .')
-        sh('terraform init')
-      }
+      sh('terraform 0.13upgrade -yes .')
+      sh('terraform init')
     }
   }
 
