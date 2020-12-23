@@ -1,14 +1,36 @@
-node{
-    
-    currentStage = 'Setup'
-    stage(currentStage){
-        pipeline = new cicd.PipeLine()
-        pipeline.cleanupAndCheckout()
+#!/user/bin/env groovy
+
+node('worker') {
+  def image
+  def pipeline = new cicd.PipeLine()
+
+  try {
+    pipeline.cleanupAndCheckout()
+
+    stage('build docker') {
+      image = pipeline.buildDockerImage(
+        appName: 'My Docker Image',
+        appVersion: '1.0'
+      )
     }
 
-     currentStage = 'Build Docker'
-    stage(currentStage){
-        pipeline.buildDockerImage([])
+    stage('terraform init') {
+      image.inside(
+        withCredentials([string(credentialsId:'OKTA_API_TOKEN', variable: 'OKTA_API_TOKEN'),]) {
+          sh('terraform 0.13upgrade -yes .')
+          sh('terraform init')
+        }
+      )
     }
-    
+  }
+
+  catch (e) {
+    print 'Error: ' + e
+    currentBuild.result = 'FAILURE'
+  }
+  finally {
+    stage('cleanup') {
+      cleanWs()
+    }
+  }
 }
