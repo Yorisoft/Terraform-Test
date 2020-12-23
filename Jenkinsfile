@@ -1,6 +1,6 @@
 #!/user/bin/env groovy
 
-node('worker') {
+node {
   def image
 
   try {
