@@ -7,4 +7,4 @@ WORKDIR /usr/src/terraform
 #copying ALL  ->  WORKDIR
 COPY . .
 
-RUN apk update && apk add tree
+RUN apk update && apk add git && apk add tree

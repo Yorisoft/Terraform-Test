@@ -4,9 +4,15 @@
 #VS files
 *.vscode
 
+#logs
+*.log
+
 #terraform plugins
 *.terraform
 
 #terraform state files
 *.tfstate
 *.tfstate.* 
+
+#misc
+desktop.ini

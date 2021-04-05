@@ -1,4 +1,3 @@
-// exporting okta_api_key
 provider "okta" {
     org_name = "dev-649194"
     base_url = "okta.com"
@@ -20,12 +19,12 @@ resource "okta_app_oauth" "example2" {
   response_types             = ["code"]
 }
 
-// exporting access_key and secret_key
-/*  data "terraform_remote_state" "iam_okta_apps" {
+ // exporting access_key and secret_key
+/*   data "terraform_remote_state" "iam_okta_apps" {
   backend = "s3"
   config = {
     bucket = "terraform-okta-s3-test"
     key    = "state_files/terraform.tfstate"
     region = "us-east-2"
   } 
- } */
+ }   */

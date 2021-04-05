@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+
 properties([
     parameters([
         booleanParam(defaultValue: false, description: 'Apply feature branch', name: 'APPLYFEATUREBRANCH')
@@ -34,7 +36,7 @@ node('worker') {
             stage('Apply Terraform') {
                 image.inside() {
                     withCredentials([string(credentialsId: 'OKTA_API_TOKEN', variable: 'OKTA_API_TOKEN'),]) {
-                        sh('terraform plan')
+                        sh('terraform apply')
                     }
                 }
             }
